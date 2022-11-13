@@ -81,7 +81,56 @@ Output:
 
 ![image](https://user-images.githubusercontent.com/110837675/201525599-7c994e1e-6686-4597-aa61-c04722162284.png)
 
- 
+```php
+plt.figure(figsize=(12,6))
+plt.hist(df['Profit'], bins=20, rwidth= 0.8, density=True)
+plt.xlabel('Profit')
+plt.ylabel('count')
+
+rng= np.arange(df['Profit'].min(), df['Profit'].max(),0.1)
+plt.plot(rng, norm.pdf(rng, df['Profit'].mean(), df['Profit'].std()));
+plt.grid(True)
+```
+Output:
+
+![image](https://user-images.githubusercontent.com/110837675/201525782-b0cce9a2-a406-4808-a9f9-c20a58e548a1.png)
+
+Visualization by heatmap chart to see correlation of variables.
+```php
+plt.figure(figsize=(20,10))
+corr1= df.corr()
+sns.heatmap(corr1, square= True, annot= True, fmt= '.2f', annot_kws= {'size':16}, cmap='viridis');
+```
+Output:
+
+![image](https://user-images.githubusercontent.com/110837675/201526091-106044a7-bfb2-4d96-9628-4672da9f59ab.png)
+
+  ## III. Data processing with Sklearn library
+Remove columns such as: Row ID, Order ID, Order Date, Ship Date, Customer ID, Product ID , Customer Name , City, Postal Code, Country, Product Name, Sub-Category, State. These are columns unnecessary for training model.
+```php
+data= df.drop(['Row ID','Order ID','Order Date','Ship Date','Customer ID','Product ID','Customer Name','City', 'Postal Code','Country','Product Name','Sub-Category','State'], axis= 'columns')
+```
+![image](https://user-images.githubusercontent.com/110837675/201527068-4ffea0be-cbb1-49cc-b762-291a0095f325.png)
+
+Next, Select feature for X are independent variables, Y is predict variable (dependent), and predict Y base on X. In this dataset, X keep the columns and remove profit column, y là column column profit.
+
+```php
+df1= data.drop(['Profit'], axis='columns')
+x= df1.values
+y= data['Profit']
+```
+Let the model have a good result, we must scaler data about the same range of values 0 and 1. I will use MinmaxScaler to  return date about the same  range of values 0 and 1.
+
+```php
+from sklearn.preprocessing import MinMaxScaler
+mn= MinMaxScaler(feature_range=(0,1))
+x[:, 4:]= mn.fit_transform(x[:,4:])
+```
+
+
+
+
+
  
  
   
