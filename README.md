@@ -69,17 +69,22 @@ Now, in the dataset will appear order-ship columns show number of days from Orde
 ```php
 fig, ((ax1,ax2),(ax3,ax4))= plt.subplots(nrows=2, ncols=2,figsize=(20,10))
 ax1.scatter(df['Profit'], df['Sales'], color='gray')
+ax1.grid(True)
 ax1.set(title='Biểu đồ tương quan giữa Profit và Sales', xlabel='Profit', ylabel='Sales');
 ax2.scatter(df['Profit'], df['Quantity'], color='black')
+ax2.grid(True)
 ax2.set(title='Biểu đồ tương quan giữa Profit và Quantity', xlabel='Profit', ylabel='Quantity');
 ax3.scatter(df['Profit'], df['Discount'], color='green')
+ax3.grid(True)
 ax3.set(title='Biểu đồ tương quan giữa Profit và Discount', xlabel='Profit', ylabel='Discount');
 ax4.scatter(df['Profit'], df['order-ship'], color='brown')
 ax4.set(title='Biểu đồ tương quan giữa Profit và order-ship', xlabel='Profit', ylabel='order-ship');
+ax4.grid(True)
 ```
 Output:
 
-![image](https://user-images.githubusercontent.com/110837675/201525599-7c994e1e-6686-4597-aa61-c04722162284.png)
+![image](https://user-images.githubusercontent.com/110837675/201528273-84cf3cd0-96a5-420f-85eb-60602a6ad41d.png)
+
 
 ```php
 plt.figure(figsize=(12,6))
@@ -112,22 +117,78 @@ data= df.drop(['Row ID','Order ID','Order Date','Ship Date','Customer ID','Produ
 ```
 ![image](https://user-images.githubusercontent.com/110837675/201527068-4ffea0be-cbb1-49cc-b762-291a0095f325.png)
 
-Next, Select feature for X are independent variables, Y is predict variable (dependent), and predict Y base on X. In this dataset, X keep the columns and remove profit column, y là column column profit.
+Next, Select feature for X are independent variables, Y is predict variable (dependent), and predict Y base on X. In this dataset, X keep the columns and remove profit column, Y is Profit column.
 
 ```php
 df1= data.drop(['Profit'], axis='columns')
 x= df1.values
 y= data['Profit']
 ```
-Let the model have a good result, we must scaler data about the same range of values 0 and 1. I will use MinmaxScaler to  return date about the same  range of values 0 and 1.
+Let the model have a good result, we must scaler data about the same range of values 0 and 1. I will use MinmaxScaler to  return data X from fourth columnback to the end (from Sales column to order-ship column)  about the same  range of values 0 and 1.
 
 ```php
 from sklearn.preprocessing import MinMaxScaler
 mn= MinMaxScaler(feature_range=(0,1))
 x[:, 4:]= mn.fit_transform(x[:,4:])
 ```
+Then, for columns with word, we have to encode them as numbers because computer only understand numbers, itn't understander word. I will use method OnehotEncoder to encode columns have word (Ship Mode, Segment, Region, Category) return number 0 and 1.
+```php
+from sklearn.compose import make_column_transformer
+from sklearn.preprocessing import OneHotEncoder
+ohe= make_column_transformer((OneHotEncoder(),[0,1,2,3]), remainder= 'passthrough')
+x= ohe.fit_transform(x)
+```
+Next, I will perform split X and Y into 2 sets of train and test(X_train, X_test, y_train, y_test). 80% data use for training model and 20% data use for testing evaluate result work of model.
+```php
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(x, y, test_size =0.2, random_state=0)
+```
+# III. Build And Evaluate Model.
+   I will call the model out and transfer the training set into model to it learn and i will evaluate model  on testing set based on criterias 'Mean_square_error, mean_squared_error and score'. For  Mean_square_error, mean_squared_error, The smaller the index, the better the model works. Criteria 'score' ,the closer the index to 1, the better the model work.
 
+```php
+from sklearn.linear_model import  LinearRegression
+from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor, AdaBoostRegressor
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.svm import  SVR
+from sklearn.neighbors import KNeighborsRegressor
+import xgboost as xgb
+import lightgbm as lgb
+from sklearn.model_selection import cross_val_score
+from sklearn.metrics import SCORERS, mean_absolute_error, mean_squared_error
+models= [LinearRegression(),RandomForestRegressor(n_estimators=10),GradientBoostingRegressor(learning_rate=0.03),
+         AdaBoostRegressor(learning_rate=0.05),
+         DecisionTreeRegressor(random_state=0, max_depth=3),
+         SVR(kernel='linear', gamma='scale',degree=4),KNeighborsRegressor(n_neighbors=2), 
+         xgb.XGBRegressor(learning_rate=0.01), lgb.LGBMRegressor(learning_rate=0.05)];
+CV = 10 
+entries = []
+i=0
+for model in models:
+    mae_l = []
+    mse_l = []
+    score= []
+    for j in range(CV):
+        model_name = model.__class__.__name__
+        model.fit(X_train, y_train)
+        y_pred = model.predict(X_test)
+        mae = mean_absolute_error(y_test, y_pred)
+        mse = mean_squared_error(y_test, y_pred)
+        score_model= model.score(X_test,y_test) 
+        score.append(score_model)
+        mae_l.append(mae)
+        mse_l.append(mse)
+    print(model.__class__.__name__, mae_l)
+    entries.append([model_name, np.array(mae_l).mean(),np.array(mse_l).mean(),np.array(score).mean()])
+    i += 1
+cv_df = pd.DataFrame(entries, columns=['model_name', 'Mean MAE','Mean MSE','score'])
+cv_df.sort_values(by=['score'], ascending=False)
+```
+![image](https://user-images.githubusercontent.com/110837675/201533215-ef46ea9f-8bcc-4614-8501-5f2dd20861c1.png)
 
+Look at the result, we can see  the model has the best work and the model isn't work good. To make the model work even better, the parameters passed to the model must be reasonable. In order to do that, I will use GridSearchCV to find the best parameters for each model.
+
+ 
 
 
 
