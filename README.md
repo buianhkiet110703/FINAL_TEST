@@ -67,23 +67,20 @@ Now, in the dataset will appear order-ship columns show number of days from Orde
   ## B. Visualization
   Data visualization by scatter chart to see the correlation of the profit column with other columns
 ```php
-fig, ((ax1,ax2),(ax3,ax4))= plt.subplots(nrows=2, ncols=2,figsize=(20,10))
-ax1.scatter(df['Sales'], df['Profit'], color='gray')
-ax1.grid(True)
-ax1.set(title='Biểu đồ tương quan giữa Profit và Sales', xlabel='Sales', ylabel='Profit');
-ax2.scatter(df['Quantity'], df['Profit'], color='black')
-ax2.grid(True)
-ax2.set(title='Biểu đồ tương quan giữa Profit và Quantity', xlabel='Quantity', ylabel='Profit');
-ax3.scatter(df['Discount'], df['Profit'], color='green')
-ax3.grid(True)
-ax3.set(title='Biểu đồ tương quan giữa Profit và Discount', xlabel='Discount', ylabel='Profit');
-ax4.scatter(df['order-ship'], df['Profit'], color='brown')
-ax4.set(title='Biểu đồ tương quan giữa Profit và order-ship', xlabel='order-ship', ylabel='Profit');
-ax4.grid(True)
+fig, axes = plt.subplots(2, 2, figsize=(20, 10))
+sns.set(rc={'axes.facecolor':'lightblue','figure.facecolor':'lightgreen'})
+sns.scatterplot(ax=axes[0, 0], data=df, x='Sales', y='Profit')
+axes[0,0].set_title('correlation between variable Profit and Sales')
+sns.scatterplot(ax=axes[0, 1], data=df, x='Quantity', y='Profit')
+axes[0,1].set_title('correlation between variable Profit and Quantity')
+sns.scatterplot(ax=axes[1, 0], data=df, x='Discount', y='Profit')
+axes[1,0].set_title('correlation between variable Profit and Discount')
+sns.scatterplot(ax=axes[1, 1], data=df, x='order-ship', y='Profit')
+axes[1,0].set_title('correlation between variable Profit and order-ship');
 ```
 Output:
 
-![image](https://user-images.githubusercontent.com/110837675/201528273-84cf3cd0-96a5-420f-85eb-60602a6ad41d.png)
+![image](https://user-images.githubusercontent.com/110837675/201739895-3196e6f2-4c7a-4453-8efa-6978df5342ed.png)
 
 
 ```php
