@@ -64,6 +64,13 @@ df['order-ship'] = (pd.to_datetime(df['Ship Date']) - pd.to_datetime(df['Order D
 Now, in the dataset will appear order-ship columns show number of days from Order Date to Ship Date.
 ![](https://scontent.fsgn15-1.fna.fbcdn.net/v/t1.15752-9/308498394_1170442966886788_8807345468326570683_n.png?_nc_cat=100&ccb=1-7&_nc_sid=ae9488&_nc_ohc=u7wWYmUOLmwAX85zybL&tn=-Fc4noKWOTfEC8FP&_nc_ht=scontent.fsgn15-1.fna&oh=03_AdSjjqxhuQrmtd7KZZhgl8ezzlWtDIVWhV5D-M3gjcUpyw&oe=639880AB)
 
+Look at the standard deviation and mean of the dataset
+```php
+df.describe()
+```
+![image](https://user-images.githubusercontent.com/110837675/201741386-ef3477d5-01b6-4d34-99b2-2d745c507139.png)
+
+
   ## B. Visualization
   Data visualization by scatter chart to see the correlation of the profit column with other columns
 ```php
