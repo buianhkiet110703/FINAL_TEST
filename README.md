@@ -68,17 +68,17 @@ Now, in the dataset will appear order-ship columns show number of days from Orde
   Data visualization by scatter chart to see the correlation of the profit column with other columns
 ```php
 fig, ((ax1,ax2),(ax3,ax4))= plt.subplots(nrows=2, ncols=2,figsize=(20,10))
-ax1.scatter(df['Profit'], df['Sales'], color='gray')
+ax1.scatter(df['Sales'], df['Profit'], color='gray')
 ax1.grid(True)
-ax1.set(title='Biểu đồ tương quan giữa Profit và Sales', xlabel='Profit', ylabel='Sales');
-ax2.scatter(df['Profit'], df['Quantity'], color='black')
+ax1.set(title='Biểu đồ tương quan giữa Profit và Sales', xlabel='Sales', ylabel='Profit');
+ax2.scatter(df['Quantity'], df['Profit'], color='black')
 ax2.grid(True)
-ax2.set(title='Biểu đồ tương quan giữa Profit và Quantity', xlabel='Profit', ylabel='Quantity');
-ax3.scatter(df['Profit'], df['Discount'], color='green')
+ax2.set(title='Biểu đồ tương quan giữa Profit và Quantity', xlabel='Quantity', ylabel='Profit');
+ax3.scatter(df['Discount'], df['Profit'], color='green')
 ax3.grid(True)
-ax3.set(title='Biểu đồ tương quan giữa Profit và Discount', xlabel='Profit', ylabel='Discount');
-ax4.scatter(df['Profit'], df['order-ship'], color='brown')
-ax4.set(title='Biểu đồ tương quan giữa Profit và order-ship', xlabel='Profit', ylabel='order-ship');
+ax3.set(title='Biểu đồ tương quan giữa Profit và Discount', xlabel='Discount', ylabel='Profit');
+ax4.scatter(df['order-ship'], df['Profit'], color='brown')
+ax4.set(title='Biểu đồ tương quan giữa Profit và order-ship', xlabel='order-ship', ylabel='Profit');
 ax4.grid(True)
 ```
 Output:
