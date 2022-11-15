@@ -2,7 +2,7 @@
 
 # I. Introduce Dataset
 
-  This is company's dataset in USA show revenue and profit of company from 2014 to 2018. The dataset has 9994 rows and includes 21 columns such as:
+  This is company's dataset in USA showing revenue and profit of this company from 2014 to 2018. The dataset has 9994 rows and includes 21 columns such as:
     
     -Order ID: unique ID of the order
     
@@ -42,7 +42,7 @@
     
     -Profit
     
- With this dataset will predict columns profit of company
+ With this dataset, I will predict columns profit of company.
     
 # II. Data Processing And Visualization
    ## A. Data Processing
@@ -55,16 +55,16 @@ df.isnull().sum()
  
  ![](https://scontent.fsgn15-1.fna.fbcdn.net/v/t1.15752-9/308537140_658095595938222_5151017212716355642_n.png?_nc_cat=111&ccb=1-7&_nc_sid=ae9488&_nc_ohc=n9tRqz5qq_gAX8H6bDy&_nc_ht=scontent.fsgn15-1.fna&oh=03_AdTGwr4hpyPX0cb_mE4RDjp-Kqzh3C7LTuK7WytlqYAfJw&oe=6398473A)
  
- This dataset hasn't NAN values
+ This dataset does not have NAN values
  
-In data has two columns time is Order Date and Ship Date, now will get number of days from Order Date to Ship Date see how long it take.
+This data has two time columns which are Order Date and Ship Date. Now I will get the number of days from Order Date to Ship Date to see how long it took to prepare the orders to ship.
 ```php
 df['order-ship'] = (pd.to_datetime(df['Ship Date']) - pd.to_datetime(df['Order Date'])).dt.days
 ```
-Now, in the dataset will appear order-ship columns show number of days from Order Date to Ship Date.
+Now, the dataset will appear order-ship columns showing the number of days from Order Date to Ship Date.
 ![](https://scontent.fsgn15-1.fna.fbcdn.net/v/t1.15752-9/308498394_1170442966886788_8807345468326570683_n.png?_nc_cat=100&ccb=1-7&_nc_sid=ae9488&_nc_ohc=u7wWYmUOLmwAX85zybL&tn=-Fc4noKWOTfEC8FP&_nc_ht=scontent.fsgn15-1.fna&oh=03_AdSjjqxhuQrmtd7KZZhgl8ezzlWtDIVWhV5D-M3gjcUpyw&oe=639880AB)
 
-Look at the standard deviation and mean of the dataset
+Look at the standard deviation and the mean of the dataset
 ```php
 df.describe()
 ```
@@ -137,34 +137,34 @@ data= df.drop(['Row ID','Order ID','Order Date','Ship Date','Customer ID','Produ
 ```
 ![image](https://user-images.githubusercontent.com/110837675/201527068-4ffea0be-cbb1-49cc-b762-291a0095f325.png)
 
-Next, Select feature for X are independent variables, Y is predict variable (dependent), and predict Y base on X. In this dataset, X keep the columns and remove profit column, Y is Profit column.
+Next, Select features for X and Y. Features for X are independent variables. Feature for Y is predict variable (dependent). Then predict Y based on X. In this dataset, X keeps all the columns but removing profit column. Y is the Profit column.
 
 ```php
 df1= data.drop(['Profit'], axis='columns')
 x= df1.values
 y= data['Profit']
 ```
-Let the model have a good result, we must scaler data about the same range of values 0 and 1. I will use MinmaxScaler to  return data X from fourth columnback to the end (from Sales column to order-ship column)  about the same  range of values 0 and 1.
+To make sure that the model have a good result, we must scaler data about the same range of values 0 and 1. I will use MinmaxScaler for data X from fourth column to the final column (from Sales column to order-ship column) to return the same range of values 0 and 1.
 
 ```php
 from sklearn.preprocessing import MinMaxScaler
 mn= MinMaxScaler(feature_range=(0,1))
 x[:, 4:]= mn.fit_transform(x[:,4:])
 ```
-Then, for columns with word, we have to encode them as numbers because computer only understand numbers, itn't understander word. I will use method OnehotEncoder to encode columns have word (Ship Mode, Segment, Region, Category) return number 0 and 1.
+Then, for columns which have words, we have to encode them as numbers because the computer only understands numbers and doesn't understander words. I will use method OnehotEncoder to encode columns having words (Ship Mode, Segment, Region, Category) to return the vector matrix which only has number 0 and 1.
 ```php
 from sklearn.compose import make_column_transformer
 from sklearn.preprocessing import OneHotEncoder
 ohe= make_column_transformer((OneHotEncoder(),[0,1,2,3]), remainder= 'passthrough')
 x= ohe.fit_transform(x)
 ```
-Next, I will perform split X and Y into 2 sets of train and test( X_train,  X_test,  y_train,  y_test). 80% data use for training model and 20% data use for testing evaluate result work of model.
+Next, I will split X and Y into 2 sets of train and test( X_train,  X_test,  y_train,  y_test). 80% data is used for training model and 20% data is used for testing to evaluate the result of model.
 ```php
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(x, y, test_size =0.2, random_state=0)
 ```
 # III. Build And Evaluate Model.
-   I will call the model out and transfer the training set into model to it learn and i will evaluate model  on testing set based on criterias 'Mean_square_error, mean_squared_error and score'. For  Mean_square_error, mean_squared_error, The smaller the index, the better the model works. Criteria 'score' ,the closer the index to 1, the better the model work.
+   I will call the model out and transfer the training set into this model so that the model can learns this traning set. Then I will evaluate model  on testing set based on criterias 'Mean_square_error, mean_squared_error and score'. For  Mean_square_error, mean_squared_error, The smaller the index, the better the model works. Criteria 'score' ,the closer the index to 1, the better the model work.
 
 ```php
 from sklearn.linear_model import  LinearRegression
