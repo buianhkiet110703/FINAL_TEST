@@ -1,4 +1,4 @@
-# FINAL_TEST
+## REGRESSION
 
 # I. Introduce Dataset
 
@@ -479,6 +479,7 @@ total.sort_values(by=['score'], ascending=False)
 I will evaluate model base on criterion 'score'. The closer the score criterion is to 1, the better the model works. So, the models that work the best are DecisionTreeRegressor, BaggingRegressor(DecisionTreeRegressor), RandomForestRegressor, GradientBoostingRegressor.
 
 
+## CLUSTERING
 
  
   
