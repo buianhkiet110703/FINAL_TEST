@@ -114,6 +114,22 @@ Output:
 
 ![image](https://user-images.githubusercontent.com/110837675/201526091-106044a7-bfb2-4d96-9628-4672da9f59ab.png)
 
+Visualize to see the concentration level of variables Sales and Profit compare with variable Segment.
+
+```php
+plt.figure(figsize=(12,6))
+sns.scatterplot(x= 'Sales', y='Profit', hue = 'Segment', data = df );
+```
+![image](https://user-images.githubusercontent.com/110837675/201817875-f223dd65-82cb-417c-b8be-2cc325cdf7c2.png)
+
+
+```php
+plt.figure(figsize=(12,6))
+sns.barplot(x= 'Segment', y='Profit', hue = 'Category', data = df );
+```
+![image](https://user-images.githubusercontent.com/110837675/201819138-455cac03-d002-4709-ba5e-cd8989d24760.png)
+
+
   ## III. Data processing with Scikit-learn
 Remove columns such as: Row ID, Order ID, Order Date, Ship Date, Customer ID, Product ID , Customer Name , City, Postal Code, Country, Product Name, Sub-Category, State. These are columns unnecessary for training model.
 ```php
