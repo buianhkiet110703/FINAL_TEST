@@ -164,7 +164,7 @@ from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(x, y, test_size =0.2, random_state=0)
 ```
 # III. Build And Evaluate Model.
-   I will call the model out and transfer the training set into this model so that the model can learns this traning set. Then I will evaluate model  on testing set based on criterias 'Mean_square_error, mean_squared_error and score'. For  Mean_square_error, mean_squared_error, The smaller the index, the better the model works. Criteria 'score' ,the closer the index to 1, the better the model work.
+   I will call the models out and transfer the training set into models so that the models can learns this traning set. Then I will evaluate models on testing set based on criteria 'Mean_square_error, mean_squared_error and score'. For Mean_square_error, mean_squared_error, the smaller the index is, the better the models work. Criteria 'score' ,the closer the index to 1, the better the models work.
 
 ```php
 from sklearn.linear_model import  LinearRegression
@@ -205,7 +205,7 @@ model_df.sort_values(by=['score'], ascending=False)
 ```
 ![image](https://user-images.githubusercontent.com/110837675/201585214-b08f4442-42fa-407c-beab-0222e3ef88e4.png)
 
-Look at the result, we can see  the model has the best work and the model isn't work good. To make the model work even better, the parameters passed to the model must be reasonable. In order to do that, I will use GridSearchCV to find the best parameters for each model.
+Look at the result, we can see that all the models have not returned good result yet. To make the models work even better, the parameters passed to the models must be reasonable. In order to do that, I will use GridSearchCV to find the best parameters for each model.
 
 ```php
 #GridSearchCV for RandomForestRegressor model
@@ -221,7 +221,7 @@ print('Best parameter_RandomForestRegressor: ',grid_RandomForestRegressor.best_p
 ```
 ![image](https://user-images.githubusercontent.com/110837675/201585877-8e386562-50ae-4fb1-879b-95b5a300456e.png)
 
-Now, I will see the best parameter for RandomForestRegressor model. Next, try with the rest of the models.
+Now, I will see the best parameter for RandomForestRegressor model. Next, let try with the rest of the models.
 
 ```php
 # GridSearchCV for DecisionTreeRegressor model
@@ -302,22 +302,6 @@ print('Best parameter_LGBMRegressor: ', grid_LGBMRegressor.best_params_ )
 ```
 ![image](https://user-images.githubusercontent.com/110837675/201575461-e611e72e-363e-4e6d-9b3e-c899af9fd6c1.png)
 
-
-```php
-# GridSearchCV for AdaBoostRegressor model
-from sklearn.ensemble import AdaBoostRegressor
-parameter_AdaBoostRegressor= {
-    'learning_rate':[0.05,0.08],
-    'loss': ['linear', 'square','exponential'],
-    'n_estimators': [50,100,1000],
-    'base_estimator': [DecisionTreeRegressor(max_depth=5),DecisionTreeRegressor(max_depth=10),DecisionTreeRegressor(max_depth=20)]
-    }
-grid_AdaBoostRegressor= GridSearchCV(AdaBoostRegressor(), parameter_AdaBoostRegressor, cv=5,verbose=2, refit=True )
-grid_AdaBoostRegressor.fit(X_train, y_train)
-print('Best parameter_AdaBoostRegressor: ', grid_AdaBoostRegressor.best_params_ )
-```
-
-After I found best parameters for each model, I will replace it into the model again, to see the best result of model.
 ```php
 # GridSearchCV for AdaBoostRegressor model
 from sklearn.ensemble import AdaBoostRegressor
@@ -333,7 +317,7 @@ print('Best parameter_AdaBoostRegressor: ', grid_AdaBoostRegressor.best_params_ 
 ```
 ![image](https://user-images.githubusercontent.com/110837675/201580965-47e129ca-1b83-408d-940e-92eb6e442d8b.png)
 
-After I found best parameters for each model, I will replace it into the model again, to see the best result of model.
+After I found best parameters for each model, I will replace them into the models again, to see the best result of models.
 
 ```php
 from sklearn.linear_model import  LinearRegression
@@ -460,7 +444,7 @@ print('SCORRE: ', score)
 ```
 ![image](https://user-images.githubusercontent.com/110837675/201606793-d1266f09-be2f-413d-a768-1cf995149967.png)
 
-I tried most of regression model. Now, I will synthetic result inclue: Mean MAE, Mean MSE and score into dataframe to evaluate model.
+I tried most of regression model. Now, I will synthetic result include: Mean MAE, Mean MSE and score into dataframe to evaluate models.
 
 ```php
 cv_df= {
