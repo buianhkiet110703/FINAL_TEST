@@ -124,6 +124,12 @@ fig.show();
 ```
 ![image](https://user-images.githubusercontent.com/110837675/202215471-4e603060-0618-43f4-aeea-d56d2534f255.png)
 
+```php
+plt.figure(figsize=(12,6))
+sns.barplot(data=df, x='Segment',y='Sales',hue='Category');
+```
+![image](https://user-images.githubusercontent.com/110837675/202243824-11e0fa02-6118-4913-8a53-bb836fde5a78.png)
+
 
   ### III. Data processing with Scikit-learn
 Remove columns such as: Row ID, Order ID, Order Date, Ship Date, Customer ID, Product ID , Customer Name , City, Postal Code, Country, Product Name, Sub-Category, State. These are columns unnecessary for training model.
