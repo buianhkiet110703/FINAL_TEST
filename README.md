@@ -87,7 +87,7 @@ axes[1,0].set_title('correlation between variable Profit and order-ship');
 ```
 Output:
 
-![image](https://user-images.githubusercontent.com/110837675/201739895-3196e6f2-4c7a-4453-8efa-6978df5342ed.png)
+![image](https://user-images.githubusercontent.com/110837675/202071698-b4d4df7f-5294-4586-a93a-991b91e7ab0d.png)
 
 
 ```php
@@ -112,7 +112,7 @@ sns.heatmap(corr1, square= True, annot= True, fmt= '.2f', annot_kws= {'size':16}
 ```
 Output:
 
-![image](https://user-images.githubusercontent.com/110837675/201526091-106044a7-bfb2-4d96-9628-4672da9f59ab.png)
+![image](https://user-images.githubusercontent.com/110837675/202073955-adfaed70-c5f6-4151-8e42-7a74614cd8a1.png)
 
 Visualize to see the concentration level of variables Sales and Profit compare with variable Segment.
 
