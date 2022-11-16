@@ -1,6 +1,6 @@
-## REGRESSION
+# REGRESSION
 
-# I. Introduce Dataset
+## I. Introduce Dataset
 
   This is company's dataset in USA showing revenue and profit of this company from 2014 to 2018. The dataset has 9994 rows and includes 21 columns such as:
     
@@ -44,8 +44,8 @@
     
  With this dataset, I will predict columns profit of company.
     
-# II. Data Processing And Visualization
-   ## A. Data Processing
+## II. Data Processing And Visualization
+   #### A. Data Processing
    
   Check columns to see if any have NAN values?
 ```php
@@ -71,7 +71,7 @@ df.describe()
 ![image](https://user-images.githubusercontent.com/110837675/201741386-ef3477d5-01b6-4d34-99b2-2d745c507139.png)
 
 
-  ## B. Visualization
+  #### B. Visualization
   Data visualization by scatter chart to see the correlation of the profit column with other columns
 ```php
 fig, axes = plt.subplots(2, 2, figsize=(20, 10))
@@ -130,7 +130,7 @@ sns.barplot(x= 'Segment', y='Profit', hue = 'Category', data = df );
 ![image](https://user-images.githubusercontent.com/110837675/201819138-455cac03-d002-4709-ba5e-cd8989d24760.png)
 
 
-  ## III. Data processing with Scikit-learn
+  ### III. Data processing with Scikit-learn
 Remove columns such as: Row ID, Order ID, Order Date, Ship Date, Customer ID, Product ID , Customer Name , City, Postal Code, Country, Product Name, Sub-Category, State. These are columns unnecessary for training model.
 ```php
 data= df.drop(['Row ID','Order ID','Order Date','Ship Date','Customer ID','Product ID','Customer Name','City', 'Postal Code','Country','Product Name','Sub-Category','State'], axis= 'columns')
@@ -463,7 +463,7 @@ total.sort_values(by=['score'], ascending=False)
 I will evaluate model base on criterion 'score'. The closer the score criterion is to 1, the better the model works. So, the models that work the best are DecisionTreeRegressor, BaggingRegressor(DecisionTreeRegressor), RandomForestRegressor, GradientBoostingRegressor.
 
 
-## CLUSTERING
+# CLUSTERING
 
  
   
