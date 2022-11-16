@@ -117,17 +117,12 @@ Output:
 Visualize to see the concentration level of variables Sales and Profit compare with variable Segment.
 
 ```php
-plt.figure(figsize=(12,6))
-sns.scatterplot(x= 'Sales', y='Profit', hue = 'Segment', data = df, s=300, alpha=0.7);;
+import plotly.express as px
+fig = px.scatter(df, x = 'Sales', y ='Profit',
+                    size ='Quantity' , color = 'Segment')
+fig.show();
 ```
-![image](https://user-images.githubusercontent.com/110837675/202074112-fd26326c-d97d-4110-9137-5a9040230b60.png)
-
-
-```php
-plt.figure(figsize=(12,6))
-sns.barplot(x= 'Segment', y='Profit', hue = 'Category', data = df );
-```
-![image](https://user-images.githubusercontent.com/110837675/201819138-455cac03-d002-4709-ba5e-cd8989d24760.png)
+![image](https://user-images.githubusercontent.com/110837675/202215471-4e603060-0618-43f4-aeea-d56d2534f255.png)
 
 
   ### III. Data processing with Scikit-learn
