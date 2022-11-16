@@ -118,9 +118,9 @@ Visualize to see the concentration level of variables Sales and Profit compare w
 
 ```php
 plt.figure(figsize=(12,6))
-sns.scatterplot(x= 'Sales', y='Profit', hue = 'Segment', data = df );
+sns.scatterplot(x= 'Sales', y='Profit', hue = 'Segment', data = df, s=300, alpha=0.7);;
 ```
-![image](https://user-images.githubusercontent.com/110837675/201817875-f223dd65-82cb-417c-b8be-2cc325cdf7c2.png)
+![image](https://user-images.githubusercontent.com/110837675/202074112-fd26326c-d97d-4110-9137-5a9040230b60.png)
 
 
 ```php
