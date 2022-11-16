@@ -152,7 +152,7 @@ from sklearn.preprocessing import MinMaxScaler
 mn= MinMaxScaler(feature_range=(0,1))
 x[:, 4:]= mn.fit_transform(x[:,4:])
 ```
-Then, for columns which have words, we have to encode them as numbers because the computer only understands numbers and doesn't understander words. I will use method OnehotEncoder to encode columns having words (Ship Mode, Segment, Region, Category) to return the vector matrix which only has number 0 and 1.
+Then, for columns which have words, we have to encode them as numbers because the computer only understands numbers and doesn't understander words. I will use method OnehotEncoder to encode columns having words (Ship Mode, Segment, Region, Category) to return only has number 0 and 1.
 ```php
 from sklearn.compose import make_column_transformer
 from sklearn.preprocessing import OneHotEncoder
