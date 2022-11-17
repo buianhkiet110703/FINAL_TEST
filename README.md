@@ -558,6 +558,9 @@ plt.legend();
 
 I think RandomForestRegressor is the best model.Beacause point of the test set tends to be closer to the prediction line.
 
+![image](https://user-images.githubusercontent.com/110837675/202349392-f492a061-853b-4a8f-b014-6f9d45c4b39d.png)
+
+
 # CLUSTERING
 
  
