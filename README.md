@@ -510,7 +510,7 @@ plt.legend();
 
 -AdaBoostRegressor model.
 
-``php
+```php
 from sklearn.ensemble import AdaBoostRegressor
 ada= AdaBoostRegressor(learning_rate=0.05, base_estimator= DecisionTreeRegressor(max_depth=5),loss='linear', n_estimators=1000)
 ada.fit(X_train, y_train)
@@ -530,6 +530,7 @@ plt.title('Predict Profit with Testing data (AdaBoostRegressor)')
 plt.plot(z[:,0],z[:,1], color= 'midnightblue', lw=3, label='y_predict');
 plt.legend();
 ```
+
 ![image](https://user-images.githubusercontent.com/110837675/202348515-7c77a704-7790-4fff-a3eb-966e0ab8bd0b.png)
 
 -RandomForestRegressor model.
