@@ -463,103 +463,6 @@ total.sort_values(by=['score'], ascending=False)
 
 I will evaluate model base on criterion 'score'. The closer the score criterion is to 1, the better the model works. So, the models that work the best are DecisionTreeRegressor, BaggingRegressor(DecisionTreeRegressor), RandomForestRegressor, GradientBoostingRegressor.
 
-Draw chart with y_pred and y_test to visualiztion.
- -LinearRegression model.
- 
- ```php
- from sklearn.linear_model import LinearRegression
-ln= LinearRegression()
-ln.fit(X_train, y_train)
-y_pred= ln.predict(X_test)
-
-import statsmodels.api as sm
-data={'prediction':y_pred, 'valid':y_test}
-test= pd.DataFrame(y_pred, columns=['prediction'])
-test['valid']=y_test
-
-lowess= sm.nonparametric.lowess
-z= lowess(y_pred.flatten(),y_test.flatten())
-
-test.plot(figsize=(12,6), x='prediction',y='valid', kind='scatter', color= 'red')
-plt.plot(z[:,0],z[:,1], color= 'midnightblue', lw=3, label='y_predict')
-plt.legend();
- ```
-![image](https://user-images.githubusercontent.com/110837675/202346964-45639754-6f00-48c2-ac3b-58080acd2932.png)
-
- -DecisionTreeRegressor model.
- ```php
- from sklearn.tree import DecisionTreeRegressor
-dc= DecisionTreeRegressor(random_state=0, max_depth=7)
-dc.fit(X_train, y_train)
-y_pred_dc= dc.predict(X_test)
-
-import statsmodels.api as sm
-data_1={'y_prediction':y_pred_dc, 'y_test':y_test}
-test= pd.DataFrame(y_pred_dc, columns=['y_prediction'])
-test['y_test']=y_test
-
-lowess= sm.nonparametric.lowess
-z= lowess(y_pred_dc.flatten(),y_test.flatten())
-
-test.plot(figsize=(12,6), x='y_prediction',y='y_test', kind='scatter', color= 'red')
-plt.title('Predict Profit with Testing data')
-plt.plot(z[:,0],z[:,1], color= 'midnightblue', lw=3, label='y_predict');
-plt.legend();
-```
-![image](https://user-images.githubusercontent.com/110837675/202347003-41875b72-d504-4280-a2f0-dcd26181ca81.png)
-
--AdaBoostRegressor model.
-
-```php
-from sklearn.ensemble import AdaBoostRegressor
-ada= AdaBoostRegressor(learning_rate=0.05, base_estimator= DecisionTreeRegressor(max_depth=5),loss='linear', n_estimators=1000)
-ada.fit(X_train, y_train)
-y_pred_ada= ada.predict(X_test)
-
-import statsmodels.api as sm
-data_1={'y_prediction':y_pred_ada, 'y_test':y_test}
-test= pd.DataFrame(y_pred_ada, columns=['y_prediction'])
-test['y_test']=y_test
-
-lowess= sm.nonparametric.lowess
-z= lowess(y_pred_ada.flatten(),y_test.flatten())
-
-test.plot(figsize=(12,6), x='y_prediction',y='y_test', kind='scatter', color= 'red',label='y_test')
-plt.grid(True)
-plt.title('Predict Profit with Testing data (AdaBoostRegressor)')
-plt.plot(z[:,0],z[:,1], color= 'midnightblue', lw=3, label='y_predict');
-plt.legend();
-```
-
-![image](https://user-images.githubusercontent.com/110837675/202348515-7c77a704-7790-4fff-a3eb-966e0ab8bd0b.png)
-
--RandomForestRegressor model.
-
-```php
-from sklearn.ensemble import RandomForestRegressor
-rf= RandomForestRegressor(random_state=0, n_estimators=12)
-rf.fit(X_train, y_train)
-y_pred_rf= rf.predict(X_test)
-
-import statsmodels.api as sm
-data_1={'y_prediction':y_pred_rf, 'y_test':y_test}
-test= pd.DataFrame(y_pred_rf, columns=['y_prediction'])
-test['y_test']=y_test
-
-lowess= sm.nonparametric.lowess
-z= lowess(y_pred_rf.flatten(),y_test.flatten())
-
-test.plot(figsize=(12,6), x='y_prediction',y='y_test', kind='scatter', color= 'red')
-plt.title('Predict Profit with Testing data')
-plt.plot(z[:,0],z[:,1], color= 'midnightblue', lw=3, label='y_predict');
-plt.legend();
-```
-![image](https://user-images.githubusercontent.com/110837675/202347040-9b3875c1-4ad8-418f-abb9-63f3bccd7bc9.png)
-
-I think RandomForestRegressor is the best model.Beacause point of the test set tends to be closer to the prediction line.
-
-![image](https://user-images.githubusercontent.com/110837675/202349392-f492a061-853b-4a8f-b014-6f9d45c4b39d.png)
-
 
 # CLUSTERING
 ## I. Introduce Dataset
@@ -815,6 +718,8 @@ fig.show()
 ```
 ![image](https://user-images.githubusercontent.com/110837675/202435585-fbbc764a-8522-4892-809c-7e261bff89af.png)
 
+Group 2 high-income countries (yellow) have a long life expectancy and high CO2 emissions. Poor countries have a lower life expectancy than rich countries, and emit less CO2.
+
 ```php
 import plotly.express as px
 fig = px.scatter(df, x = 'Rate of using basic drinking water (%)', y ='Life Expectancy (Year)',
@@ -822,6 +727,8 @@ fig = px.scatter(df, x = 'Rate of using basic drinking water (%)', y ='Life Expe
 fig.show()
 ```
 ![image](https://user-images.githubusercontent.com/110837675/202436088-71800f4e-8165-496b-aead-67f564b2c2b7.png)
+
+High-income countries have very high access to clean drinking water and a high life expectancy. Poor countries suffer from very low access to safe drinking water and lower life expectancy than rich countries.
 
 ```php
 import plotly.express as px
@@ -831,6 +738,8 @@ fig.show()
 ```
 ![image](https://user-images.githubusercontent.com/110837675/202436667-11336f8c-eb9b-4998-894b-c82a25e62115.png)
 
+High and relative income countries (yellow and blue) have very high rates of adult obesity. Because high-income countries have a lot of excess food, the rate of obesity is very high. Compared to low-income countries, obesity rates are very low. Because low-income countries do not have much food and lack of food, obesity rates are lower, but in terms of life expectancy, Poor countries still have a lower average age than high-income countries.
+
 ```php
 import plotly.express as px
 fig = px.scatter(df, x = 'Beer consumption per capita (Liter)', y ='Life Expectancy (Year)',
@@ -839,6 +748,11 @@ fig.show()
 ```
 ![image](https://user-images.githubusercontent.com/110837675/202436905-8425d0c8-c3d5-4566-9ecb-9d2c32b39e49.png)
 
+
+In terms of beer consumption per capita, Group 2 and Group 0 countries (yellow and blue) have a very high beer consumption rate. As for the low-income Group 1 (purple) countries, the amount of beer consumed per capita is lower than in the high-income countries.
+
+
+Rich countries should share the economy and poorer countries, so that CO2 emissions into the environment are reduced. And poor countries, if they have economic conditions, their quality of life will be higher, the average life expectancy will be higher.
 
 
 
