@@ -508,6 +508,30 @@ plt.legend();
 ```
 ![image](https://user-images.githubusercontent.com/110837675/202347003-41875b72-d504-4280-a2f0-dcd26181ca81.png)
 
+-AdaBoostRegressor model.
+
+``php
+from sklearn.ensemble import AdaBoostRegressor
+ada= AdaBoostRegressor(learning_rate=0.05, base_estimator= DecisionTreeRegressor(max_depth=5),loss='linear', n_estimators=1000)
+ada.fit(X_train, y_train)
+y_pred_ada= ada.predict(X_test)
+
+import statsmodels.api as sm
+data_1={'y_prediction':y_pred_ada, 'y_test':y_test}
+test= pd.DataFrame(y_pred_ada, columns=['y_prediction'])
+test['y_test']=y_test
+
+lowess= sm.nonparametric.lowess
+z= lowess(y_pred_ada.flatten(),y_test.flatten())
+
+test.plot(figsize=(12,6), x='y_prediction',y='y_test', kind='scatter', color= 'red',label='y_test')
+plt.grid(True)
+plt.title('Predict Profit with Testing data (AdaBoostRegressor)')
+plt.plot(z[:,0],z[:,1], color= 'midnightblue', lw=3, label='y_predict');
+plt.legend();
+```
+![image](https://user-images.githubusercontent.com/110837675/202348515-7c77a704-7790-4fff-a3eb-966e0ab8bd0b.png)
+
 -RandomForestRegressor model.
 
 ```php
@@ -531,7 +555,7 @@ plt.legend();
 ```
 ![image](https://user-images.githubusercontent.com/110837675/202347040-9b3875c1-4ad8-418f-abb9-63f3bccd7bc9.png)
 
-I think RandomForestRegressor model beacause point of the test set tends to be closer to the prediction line.
+I think RandomForestRegressor is the best model.Beacause point of the test set tends to be closer to the prediction line.
 
 # CLUSTERING
 
