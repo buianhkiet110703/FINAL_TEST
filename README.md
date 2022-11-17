@@ -463,6 +463,75 @@ total.sort_values(by=['score'], ascending=False)
 
 I will evaluate model base on criterion 'score'. The closer the score criterion is to 1, the better the model works. So, the models that work the best are DecisionTreeRegressor, BaggingRegressor(DecisionTreeRegressor), RandomForestRegressor, GradientBoostingRegressor.
 
+Draw chart with y_pred and y_test to visualiztion.
+ -LinearRegression model.
+ 
+ ```php
+ from sklearn.linear_model import LinearRegression
+ln= LinearRegression()
+ln.fit(X_train, y_train)
+y_pred= ln.predict(X_test)
+
+import statsmodels.api as sm
+data={'prediction':y_pred, 'valid':y_test}
+test= pd.DataFrame(y_pred, columns=['prediction'])
+test['valid']=y_test
+
+lowess= sm.nonparametric.lowess
+z= lowess(y_pred.flatten(),y_test.flatten())
+
+test.plot(figsize=(12,6), x='prediction',y='valid', kind='scatter', color= 'red')
+plt.plot(z[:,0],z[:,1], color= 'midnightblue', lw=3, label='y_predict')
+plt.legend();
+ ```
+![image](https://user-images.githubusercontent.com/110837675/202346621-fa1e0513-a747-4028-89ad-642cfe754215.png)
+
+ -DecisionTreeRegressor model.
+ ```php
+ from sklearn.tree import DecisionTreeRegressor
+dc= DecisionTreeRegressor(random_state=0, max_depth=7)
+dc.fit(X_train, y_train)
+y_pred_dc= dc.predict(X_test)
+
+import statsmodels.api as sm
+data_1={'y_prediction':y_pred_dc, 'y_test':y_test}
+test= pd.DataFrame(y_pred_dc, columns=['y_prediction'])
+test['y_test']=y_test
+
+lowess= sm.nonparametric.lowess
+z= lowess(y_pred_dc.flatten(),y_test.flatten())
+
+test.plot(figsize=(12,6), x='y_prediction',y='y_test', kind='scatter', color= 'red')
+plt.title('Predict Profit with Testing data')
+plt.plot(z[:,0],z[:,1], color= 'midnightblue', lw=3, label='y_predict');
+plt.legend();
+```
+![image](https://user-images.githubusercontent.com/110837675/202346671-a048aff4-b61b-4f44-b70a-aa49535d1281.png)
+
+-RandomForestRegressor model.
+
+```php
+from sklearn.ensemble import RandomForestRegressor
+rf= RandomForestRegressor(random_state=0, n_estimators=12)
+rf.fit(X_train, y_train)
+y_pred_rf= rf.predict(X_test)
+
+import statsmodels.api as sm
+data_1={'y_prediction':y_pred_rf, 'y_test':y_test}
+test= pd.DataFrame(y_pred_rf, columns=['y_prediction'])
+test['y_test']=y_test
+
+lowess= sm.nonparametric.lowess
+z= lowess(y_pred_rf.flatten(),y_test.flatten())
+
+test.plot(figsize=(12,6), x='y_prediction',y='y_test', kind='scatter', color= 'red')
+plt.title('Predict Profit with Testing data')
+plt.plot(z[:,0],z[:,1], color= 'midnightblue', lw=3, label='y_predict');
+plt.legend();
+```
+![image](https://user-images.githubusercontent.com/110837675/202346710-b42264be-169b-4064-8815-ad0d19df5a8d.png)
+
+I think RandomForestRegressor model beacause point of the test set tends to be closer to the prediction line.
 
 # CLUSTERING
 
