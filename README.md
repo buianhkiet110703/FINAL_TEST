@@ -484,7 +484,7 @@ test.plot(figsize=(12,6), x='prediction',y='valid', kind='scatter', color= 'red'
 plt.plot(z[:,0],z[:,1], color= 'midnightblue', lw=3, label='y_predict')
 plt.legend();
  ```
-![image](https://user-images.githubusercontent.com/110837675/202346621-fa1e0513-a747-4028-89ad-642cfe754215.png)
+![image](https://user-images.githubusercontent.com/110837675/202346964-45639754-6f00-48c2-ac3b-58080acd2932.png)
 
  -DecisionTreeRegressor model.
  ```php
@@ -506,7 +506,7 @@ plt.title('Predict Profit with Testing data')
 plt.plot(z[:,0],z[:,1], color= 'midnightblue', lw=3, label='y_predict');
 plt.legend();
 ```
-![image](https://user-images.githubusercontent.com/110837675/202346671-a048aff4-b61b-4f44-b70a-aa49535d1281.png)
+![image](https://user-images.githubusercontent.com/110837675/202347003-41875b72-d504-4280-a2f0-dcd26181ca81.png)
 
 -RandomForestRegressor model.
 
@@ -529,7 +529,7 @@ plt.title('Predict Profit with Testing data')
 plt.plot(z[:,0],z[:,1], color= 'midnightblue', lw=3, label='y_predict');
 plt.legend();
 ```
-![image](https://user-images.githubusercontent.com/110837675/202346710-b42264be-169b-4064-8815-ad0d19df5a8d.png)
+![image](https://user-images.githubusercontent.com/110837675/202347040-9b3875c1-4ad8-418f-abb9-63f3bccd7bc9.png)
 
 I think RandomForestRegressor model beacause point of the test set tends to be closer to the prediction line.
 
