@@ -119,10 +119,10 @@ Visualize to see the concentration level of variables Sales and Profit compare w
 ```php
 import plotly.express as px
 fig = px.scatter(df, x = 'Sales', y ='Profit',
-                    size ='Quantity' , color = 'Segment')
+                   size='Sales'  , color = 'Segment')
 fig.show();
 ```
-![image](https://user-images.githubusercontent.com/110837675/202215471-4e603060-0618-43f4-aeea-d56d2534f255.png)
+![image](https://user-images.githubusercontent.com/110837675/202698545-d276b3aa-e691-45ec-ba73-d2a60899b728.png)
 
 ```php
 plt.figure(figsize=(12,6))
