@@ -487,14 +487,19 @@ Data doesn't have NAN values.
   #### B. Visualization
   Data visualization by scatter chart to see the correlation of the Life Expectancy (Year) column with other columns.
   ```php
-  fig, axes = plt.subplots(2, 3, figsize=(20, 10))
+fig, axes = plt.subplots(2, 3, figsize=(20, 10))
 sns.scatterplot(ax=axes[0, 0], data=df, x='CO2 emissions (Billion tons)', y='Life Expectancy (Year)', s=200, alpha=0.7,color='red')
+axes[0,0].grid(True)
 sns.scatterplot(ax=axes[0, 1], data=df, x='GDP per capita ($)', y='Life Expectancy (Year)', s=200, alpha=0.7, color='green')
+axes[0,1].grid(True)
 sns.scatterplot(ax=axes[0, 2], data=df, x='Rate of using basic drinking water (%)', y='Life Expectancy (Year)', s=200, alpha=0.7, color='black')
+axes[0,2].grid(True)
 sns.scatterplot(ax=axes[1, 0], data=df, x='Obesity among adults (%)', y='Life Expectancy (Year)', s=200, alpha=0.7, color='pink')
+axes[1,0].grid(True)
 sns.scatterplot(ax=axes[1, 1], data=df, x='Beer consumption per capita (Liter)', y='Life Expectancy (Year)', s=200, alpha=0.7, color='brown');
+axes[1,1].grid(True)
 ```
-![image](https://user-images.githubusercontent.com/110837675/202419106-fd28dc6b-f4b6-41cc-aee2-20ddeab7d156.png)
+![image](https://user-images.githubusercontent.com/110837675/202599885-02d4a5f2-bd12-4660-b409-b985656d59d3.png)
 
 ```php
 plt.figure(figsize=(20,10))
