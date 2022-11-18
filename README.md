@@ -47,6 +47,8 @@
 ## II. Data Processing And Visualization
    #### A. Data Processing
    
+   ![image](https://user-images.githubusercontent.com/110837675/202710269-34ed2805-0847-4140-851a-9cdc23ab7694.png)
+
   Check columns to see if any have NAN values?
 ```php
 df.isnull().sum()
