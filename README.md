@@ -109,8 +109,9 @@ Output:
 Visualization by heatmap chart to see correlation of variables.
 ```php
 plt.figure(figsize=(20,10))
+plt.title('CORRELATION ')
 corr1= df.corr()
-sns.heatmap(corr1, square= True, annot= True, fmt= '.2f', annot_kws= {'size':16}, cmap='viridis');
+sns.heatmap(corr1, square= True, annot= True, fmt= '.2f', annot_kws= {'size':16}, cmap='Blues', linecolor='white', linewidths=0.5);;
 ```
 Output:
 
