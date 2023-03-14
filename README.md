@@ -209,6 +209,17 @@ model_df.sort_values(by=['score'], ascending=False)
 ```
 ![image](https://user-images.githubusercontent.com/110837675/201585214-b08f4442-42fa-407c-beab-0222e3ef88e4.png)
 
+Visualization results.
+```php
+plt.figure(figsize=(18,6))
+plt.barh(model_df['model_name'],model_df['score'],color=sns.color_palette('viridis'))
+plt.title('Machine Learning Algorithm Accuracy Score \n')
+plt.xlabel('Accuracy Score (%)')
+plt.ylabel('Algorithm')
+```
+![image](https://user-images.githubusercontent.com/110837675/224960105-c27453f1-cc0c-4df4-b7b8-00776175ec10.png)
+
+
 Look at the result, we can see that all the models have not returned good result yet. To make the models work even better, the parameters passed to the models must be reasonable. In order to do that, I will use GridSearchCV to find the best parameters for each model.
 
 ```php
@@ -362,9 +373,22 @@ model_df.sort_values(by=['score'], ascending=False)
 ```
 ![image](https://user-images.githubusercontent.com/110837675/201587937-7695de76-4ae1-4f3b-b426-fe1317f3c118.png)
 
+Visualization results.
+
+![image](https://user-images.githubusercontent.com/110837675/224962403-c37bd3ff-2cdb-45bb-a41d-1dd4a1570682.png)
+
 Now, Compare result before and after passed parameters into the model.
 
 ![image](https://user-images.githubusercontent.com/110837675/201597803-e4290ae9-f5ce-4d28-ac89-32df3cb3530a.png)
+
+
+```php
+plt.figure(figsize=(18,6))
+plt.barh(model_df['model_name'],model_df['score'],color=sns.color_palette('Blues'))
+plt.title('Machine Learning Algorithm Accuracy Score \n')
+plt.xlabel('Accuracy Score (%)')
+plt.ylabel('Algorithm')
+```
 
 Try with PolynomialFeatures model.
 ```php
